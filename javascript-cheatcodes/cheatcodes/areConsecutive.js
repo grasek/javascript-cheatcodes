@@ -1,8 +1,9 @@
 export const areConsecutive = (arr1, arr2) => {
-    const start = arr2.indexOf(arr1[0]);
-    if (start === -1 || start + arr1.length > arr2.length) return false;
-    for (const [i, value] of arr1.entries()) {
-        if (value !== arr2[start + i]) return false;
-    }
-    return true;
+   arr1.sort((a, b) => a - b);
+   const start = arr2.findIndex(
+      (x, i) =>
+         i + arr1.length <= arr2.length &&
+         arr1.every((y, j) => y === arr2[i + j])
+   );
+   return start !== -1;
 };
